@@ -19,6 +19,10 @@ interface JokeDataSource : JokeRepository {
 
         override fun jokeChangedName(name: String?, surname: String?): Single<Joke> =
                 restApi.randomJokeChangedName(name, surname).map { jokeEntity -> jokeEntity.toJoke()  }
+
+        override fun jokes(number: Int): Single<List<Joke>> =
+                restApi.randomJokes(number).map { jokeEntity -> jokeEntity.toJokeList() }
+
     }
 
 }
