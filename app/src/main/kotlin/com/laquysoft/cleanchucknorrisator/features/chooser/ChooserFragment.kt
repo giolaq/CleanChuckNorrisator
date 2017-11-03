@@ -1,5 +1,6 @@
 package com.laquysoft.cleanchucknorrisator.features.chooser
 
+import android.app.Dialog
 import android.os.Bundle
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
@@ -8,6 +9,7 @@ import com.laquysoft.cleanchucknorrisator.BaseFragment
 import com.laquysoft.cleanchucknorrisator.R
 import com.laquysoft.cleanchucknorrisator.navigation.Navigator
 import kotlinx.android.synthetic.main.fragment_chooser.*
+import kotlinx.android.synthetic.main.random_joke_dialog.*
 import javax.inject.Inject
 
 class ChooserFragment : BaseFragment(), RandomJokeView {
@@ -55,6 +57,16 @@ class ChooserFragment : BaseFragment(), RandomJokeView {
 
     override fun renderJoke(joke: Joke) {
         Log.d("ChooserFragment", joke.joke)
+        showJokeDialog(joke.joke)
+    }
+
+    private fun showJokeDialog(joke: String) {
+        val dialog = Dialog(activity)
+        dialog.setContentView(R.layout.random_joke_dialog)
+        dialog.setTitle("Random joke")
+        dialog.dismiss_button.setOnClickListener { dialog.dismiss() }
+        dialog.joke.setText(joke)
+        dialog.show()
     }
 
 
