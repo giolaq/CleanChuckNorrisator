@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Movies Kotlin</string>
+    <string name="random">Random</string>
+    <string name="change_name">Change Name</string>
+    <string name="ne_list">NE list</string>
+    <string name="chooser_screen_title">Chooser</string>
+</resources>

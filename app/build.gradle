@@ -1,0 +1,104 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.laquysoft.cleanchucknorrisator"
+        minSdkVersion 14
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
+
+    lintOptions {
+        quiet true
+        abortOnError false
+        ignoreWarnings true
+        disable 'InvalidPackage'            //Some libraries have issues with this.
+        disable 'OldTargetApi'              //Lint gives this warning but SDK 20 would be Android L Beta.
+        disable 'IconDensities'             //For testing purpose. This is safe to remove.
+        disable 'IconMissingDensityFolder'  //For testing purpose. This is safe to remove.
+    }
+
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        main.java.srcDirs += [file("$buildDir/generated/source/kapt/main")]
+        test.java.srcDirs += 'src/test/kotlin'
+        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+    }
+}
+
+dependencies {
+    def applicationDependencies = rootProject.ext.mainApplication
+    def unitTestDependencies = rootProject.ext.unitTesting
+    def acceptanceTestDependencies = rootProject.ext.acceptanceTesting
+    def developmentDependencies = rootProject.ext.development
+
+    //Compile time dependencies
+    kapt applicationDependencies.daggerCompiler
+    provided applicationDependencies.javaxAnnotation
+    provided applicationDependencies.javaxInject
+
+    //Application dependencies
+    compile applicationDependencies.kotlin
+    compile applicationDependencies.appCompat
+    compile applicationDependencies.cardView
+    compile applicationDependencies.recyclerView
+    compile applicationDependencies.design
+    compile applicationDependencies.androidAnnotations
+    compile applicationDependencies.glide
+    compile applicationDependencies.dagger
+    compile applicationDependencies.rxJava
+    compile applicationDependencies.rxAndroid
+    compile applicationDependencies.retrofit
+    compile applicationDependencies.retrofitAdapter
+    compile applicationDependencies.okhttpLoggingInterceptor
+
+    //Unit/Integration tests dependencies
+    testCompile unitTestDependencies.kotlin
+    testCompile unitTestDependencies.kotlinTest
+    testCompile unitTestDependencies.robolectric
+    testCompile unitTestDependencies.junit
+    testCompile unitTestDependencies.mockito
+    testCompile unitTestDependencies.kluent
+
+    //Acceptance tests dependencies
+    androidTestCompile acceptanceTestDependencies.testRunner
+    androidTestCompile acceptanceTestDependencies.testRules
+    androidTestCompile acceptanceTestDependencies.espressoCore
+    androidTestCompile acceptanceTestDependencies.espressoIntents
+    androidTestCompile acceptanceTestDependencies.androidAnnotations
+
+    //Development dependencies
+    debugCompile developmentDependencies.leakCanary
+    releaseCompile developmentDependencies.leakCanaryNoop
+    testCompile developmentDependencies.leakCanaryNoop
+}
+
+
+kapt {
+    generateStubs = true
+}
+
