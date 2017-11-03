@@ -1,6 +1,7 @@
 package com.laquysoft.cleanchucknorrisator.navigation
 
 import android.content.Context
+import com.laquysoft.cleanchucknorrisator.features.changename.ChangedNameActivity
 
 import com.laquysoft.cleanchucknorrisator.features.chooser.ChooserActivity
 
@@ -14,7 +15,7 @@ class Navigator
 
 
     fun showChooser(context: Context) = context.startActivity(ChooserActivity.callingIntent(context))
-    //private fun showChangeName(context: Context) = context.startActivity(ChangeNameJokeActivity.callingIntent(context))
+    fun showChangeName(context: Context) = context.startActivity(ChangedNameActivity.callingIntent(context))
     //private fun showNEList(context: Context) = context.startActivity(NEListActivity.callingIntent(context))
 }
 

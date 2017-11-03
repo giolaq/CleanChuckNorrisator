@@ -1,23 +1,26 @@
-package com.laquysoft.cleanchucknorrisator.features.chooser
+package com.laquysoft.cleanchucknorrisator.features.changename
 
 import android.app.Dialog
 import android.os.Bundle
-import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
 import android.view.View
 import com.laquysoft.cleanchucknorrisator.BaseFragment
 import com.laquysoft.cleanchucknorrisator.R
+import com.laquysoft.cleanchucknorrisator.features.chooser.Joke
+import com.laquysoft.cleanchucknorrisator.features.chooser.RandomJokePresenter
+import com.laquysoft.cleanchucknorrisator.features.chooser.RandomJokeView
 import com.laquysoft.cleanchucknorrisator.navigation.Navigator
+import kotlinx.android.synthetic.main.fragment_changed_name.*
 import kotlinx.android.synthetic.main.fragment_chooser.*
 import kotlinx.android.synthetic.main.random_joke_dialog.*
 import javax.inject.Inject
 
-class ChooserFragment : BaseFragment(), RandomJokeView {
+class ChangedNameFragment : BaseFragment(), RandomJokeView {
 
     @Inject lateinit var navigator: Navigator
-    @Inject lateinit var randomJokePresenter: RandomJokePresenter
+    @Inject lateinit var changedNamePresenter: ChangedNamePresenter
 
-    override fun layoutId() = R.layout.fragment_chooser
+    override fun layoutId() = R.layout.fragment_changed_name
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +34,7 @@ class ChooserFragment : BaseFragment(), RandomJokeView {
 
     override fun onDestroy() {
         super.onDestroy()
-        randomJokePresenter.destroy()
+        changedNamePresenter.destroy()
     }
 
 
@@ -48,16 +51,15 @@ class ChooserFragment : BaseFragment(), RandomJokeView {
     }
 
     private fun initializeView() {
-        randomJokePresenter.randomJokeView = this
+        changedNamePresenter.randomJokeView = this
 
-        button_random.setOnClickListener { loadRandomJoke() }
-
-        button_change_name.setOnClickListener { navigator.showChangeName(activity) }
+        button_submit.setOnClickListener {
+            loadChangedNameJoke(name_edit.text.toString()) }
 
     }
 
     override fun renderJoke(joke: Joke) {
-        Log.d("ChooserFragment", joke.joke)
+        Log.d("ChangedNameFragment", joke.joke)
         showJokeDialog(joke.joke)
     }
 
@@ -71,5 +73,5 @@ class ChooserFragment : BaseFragment(), RandomJokeView {
     }
 
 
-    private fun loadRandomJoke() = randomJokePresenter.loadRandomJoke()
+    private fun loadChangedNameJoke(textInput: String) = changedNamePresenter.loadRandomJokeChangedName(textInput)
 }

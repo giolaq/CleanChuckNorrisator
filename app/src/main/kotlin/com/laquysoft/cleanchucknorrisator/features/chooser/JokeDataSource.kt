@@ -8,19 +8,17 @@ import javax.inject.Inject
 interface JokeDataSource : JokeRepository {
 
     class Factory
-    @Inject constructor(val network: Lazy<Network>, val disk: Lazy<Disk>) {
+    @Inject constructor(val network: Lazy<Network>) {
         fun network(): Network = network.get()
-        fun disk(): Disk = disk.get()
     }
 
     class Network
     @Inject constructor(private val restApi: RestApi) : JokeDataSource {
         override fun joke(): Single<Joke> =
                 restApi.randomJoke().map { jokeEntity -> jokeEntity.toJoke()  }
+
+        override fun jokeChangedName(name: String?, surname: String?): Single<Joke> =
+                restApi.randomJokeChangedName(name, surname).map { jokeEntity -> jokeEntity.toJoke()  }
     }
 
-    class Disk
-    @Inject constructor() : JokeDataSource {
-        override fun joke(): Single<Joke> = TODO()
-    }
 }

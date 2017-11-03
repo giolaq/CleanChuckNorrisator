@@ -2,6 +2,7 @@ package com.laquysoft.cleanchucknorrisator.di
 
 import com.laquysoft.cleanchucknorrisator.AndroidApplication
 import com.laquysoft.cleanchucknorrisator.di.ApplicationModule
+import com.laquysoft.cleanchucknorrisator.features.changename.ChangedNameFragment
 import com.laquysoft.cleanchucknorrisator.features.chooser.ChooserFragment
 import com.laquysoft.cleanchucknorrisator.features.chooser.JokeModule
 import com.laquysoft.cleanchucknorrisator.navigation.RouteActivity
@@ -18,6 +19,7 @@ interface ApplicationComponent {
 
     //TODO: do scoping here
     fun inject(chooserFragment: ChooserFragment)
+    fun inject(chooserFragment: ChangedNameFragment)
 
     fun subComponentBuilders(): Map<Class<*>, Provider<SubcomponentBuilder<*>>>
 }

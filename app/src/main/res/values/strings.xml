@@ -4,6 +4,8 @@
     <string name="change_name">Change Name</string>
     <string name="ne_list">NE list</string>
     <string name="chooser_screen_title">Chooser</string>
+    <string name="change_name_screen_title">Change Name</string>
     <string name="joke_text">Joke Text</string>
     <string name="dismiss">Dismiss</string>
+    <string name="submit">Submit</string>
 </resources>

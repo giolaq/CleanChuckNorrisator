@@ -10,4 +10,5 @@ class RestApi
     private val jokesApi by lazy { retrofit.create(JokesApi::class.java) }
 
     override fun randomJoke() = jokesApi.randomJoke()
+    override fun randomJokeChangedName(name: String?, surname: String?) = jokesApi.randomJokeChangedName(name, surname)
 }
