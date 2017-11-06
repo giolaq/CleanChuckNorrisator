@@ -5,6 +5,7 @@ class Endpoints {
         const val PARAM_FIRST_NAME = "firstName"
         const val PARAM_LAST_NAME = "lastName"
         const val PARAM_JOKES_NUM = "Num"
+        const val PARAM_JOKES_EXCLUDE = "exclude"
 
         const val ICNDB_BASE = "https://api.icndb.com/"
         const val JOKES = "jokes/"

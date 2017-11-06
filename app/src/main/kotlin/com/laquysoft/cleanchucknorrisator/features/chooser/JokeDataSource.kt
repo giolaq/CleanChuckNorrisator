@@ -14,14 +14,32 @@ interface JokeDataSource : JokeRepository {
 
     class Network
     @Inject constructor(private val restApi: RestApi) : JokeDataSource {
-        override fun joke(): Single<Joke> =
-                restApi.randomJoke().map { jokeEntity -> jokeEntity.toJoke()  }
+        override fun joke(noExplicit: Boolean?): Single<Joke> {
+            if (noExplicit == false) {
+                return restApi.randomJoke(null).map { jokeEntity -> jokeEntity.toJoke() }
 
-        override fun jokeChangedName(name: String?, surname: String?): Single<Joke> =
-                restApi.randomJokeChangedName(name, surname).map { jokeEntity -> jokeEntity.toJoke()  }
+            } else {
+                return restApi.randomJoke("explicit").map { jokeEntity -> jokeEntity.toJoke() }
+            }
+        }
 
-        override fun jokes(number: Int): Single<List<Joke>> =
-                restApi.randomJokes(number).map { jokeEntity -> jokeEntity.toJokeList() }
+        override fun jokeChangedName(name: String?, surname: String?, noExplicit: Boolean?): Single<Joke> {
+            if (noExplicit == false) {
+                return restApi.randomJokeChangedName(name, surname, null).map { jokeEntity -> jokeEntity.toJoke() }
+
+            } else {
+                return restApi.randomJokeChangedName(name, surname, "explicit").map { jokeEntity -> jokeEntity.toJoke() }
+            }
+        }
+
+        override fun jokes(number: Int, noExplicit: Boolean?): Single<List<Joke>> {
+            if (noExplicit == false) {
+                return restApi.randomJokes(number, null).map { jokeEntity -> jokeEntity.toJokeList() }
+
+            } else {
+                return restApi.randomJokes(number, "explicit").map { jokeEntity -> jokeEntity.toJokeList() }
+            }
+        }
 
     }
 

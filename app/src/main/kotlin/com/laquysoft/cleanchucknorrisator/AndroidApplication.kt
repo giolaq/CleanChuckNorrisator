@@ -6,8 +6,13 @@ import com.laquysoft.cleanchucknorrisator.di.ApplicationModule
 import com.laquysoft.cleanchucknorrisator.di.DaggerApplicationComponent
 import com.squareup.leakcanary.LeakCanary
 
+val prefs: Prefs by lazy {
+    AndroidApplication.prefs!!
+}
 class AndroidApplication : Application() {
-
+    companion object {
+        var prefs: Prefs? = null
+    }
     val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
         DaggerApplicationComponent
                 .builder()
@@ -16,6 +21,7 @@ class AndroidApplication : Application() {
     }
 
     override fun onCreate() {
+        prefs = Prefs(applicationContext)
         super.onCreate()
         this.injectMembers()
         this.initializeLeakDetection()

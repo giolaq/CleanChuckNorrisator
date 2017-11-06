@@ -2,9 +2,9 @@ package com.laquysoft.cleanchucknorrisator.features.chooser
 
 import android.app.Dialog
 import android.os.Bundle
-import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
 import android.view.View
+import android.widget.CheckBox
 import com.laquysoft.cleanchucknorrisator.BaseFragment
 import com.laquysoft.cleanchucknorrisator.R
 import com.laquysoft.cleanchucknorrisator.navigation.Navigator
@@ -56,6 +56,11 @@ class ChooserFragment : BaseFragment(), RandomJokeView {
 
         button_ne_list.setOnClickListener { navigator.showNEList(activity) }
 
+        explicit_checkBox.setOnClickListener { checkBox ->
+            checkBox as CheckBox
+            val check = checkBox.isChecked
+            randomJokePresenter.setNoExplicitFilter(check)
+        }
     }
 
     override fun renderJoke(joke: Joke) {

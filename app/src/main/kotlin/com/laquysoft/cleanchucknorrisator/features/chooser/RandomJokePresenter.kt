@@ -1,6 +1,9 @@
 package com.laquysoft.cleanchucknorrisator.features.chooser
 
 
+import com.laquysoft.cleanchucknorrisator.AndroidApplication
+import com.laquysoft.cleanchucknorrisator.Prefs
+import com.laquysoft.cleanchucknorrisator.prefs
 import javax.inject.Inject
 
 /**
@@ -20,8 +23,14 @@ class RandomJokePresenter
     fun loadRandomJoke() {
         randomJokeView.showLoading()
         getRadomJoke.execute(
-                { joke -> randomJokeView.renderJoke(joke)
-                    randomJokeView.hideLoading() },
+                { joke ->
+                    randomJokeView.renderJoke(joke)
+                    randomJokeView.hideLoading()
+                },
                 { TODO() })
+    }
+
+    fun setNoExplicitFilter(check: Boolean) {
+        prefs.noExplicit = check
     }
 }

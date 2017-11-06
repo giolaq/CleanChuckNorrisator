@@ -4,6 +4,7 @@ import com.laquysoft.cleanchucknorrisator.features.chooser.Joke
 import com.laquysoft.cleanchucknorrisator.features.chooser.JokeRepository
 import com.laquysoft.cleanchucknorrisator.framework.executor.ExecutionScheduler
 import com.laquysoft.cleanchucknorrisator.framework.interactor.UseCase
+import com.laquysoft.cleanchucknorrisator.prefs
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -13,6 +14,6 @@ class GetRandomJokes
 
     val numberOfJokes = 20
     override fun build(params: None?): Single<List<Joke>> =
-            jokeRepository.jokes(numberOfJokes).compose(scheduler.highPrioritySingle())
+            jokeRepository.jokes(numberOfJokes, prefs.noExplicit).compose(scheduler.highPrioritySingle())
 
 }
