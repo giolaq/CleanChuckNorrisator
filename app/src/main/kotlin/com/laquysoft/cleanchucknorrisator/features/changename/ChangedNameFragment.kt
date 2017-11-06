@@ -13,6 +13,7 @@ import com.laquysoft.cleanchucknorrisator.navigation.Navigator
 import kotlinx.android.synthetic.main.fragment_changed_name.*
 import kotlinx.android.synthetic.main.fragment_chooser.*
 import kotlinx.android.synthetic.main.random_joke_dialog.*
+import kotlinx.android.synthetic.main.toolbar.*
 import javax.inject.Inject
 
 class ChangedNameFragment : BaseFragment(), RandomJokeView {
@@ -64,7 +65,7 @@ class ChangedNameFragment : BaseFragment(), RandomJokeView {
     }
 
     private fun showJokeDialog(joke: String) {
-        val dialog = Dialog(activity)
+        val dialog = Dialog(this.activity)
         dialog.setContentView(R.layout.random_joke_dialog)
         dialog.setTitle("Random joke")
         dialog.dismiss_button.setOnClickListener { dialog.dismiss() }

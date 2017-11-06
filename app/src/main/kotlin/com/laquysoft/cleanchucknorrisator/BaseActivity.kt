@@ -2,6 +2,7 @@ package com.laquysoft.cleanchucknorrisator
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import com.laquysoft.cleanchucknorrisator.framework.extension.inTransaction
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -14,6 +15,10 @@ abstract class BaseActivity : AppCompatActivity() {
         addFragment(savedInstanceState)
     }
 
+    fun enableHomeUpButton() {
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        toolbar.setNavigationOnClickListener(View.OnClickListener { onBackPressed() })
+    }
     override fun onBackPressed() {
         (supportFragmentManager.findFragmentById(R.id.fragmentContainer) as BaseFragment).onBackPressed()
         super.onBackPressed()
