@@ -73,7 +73,7 @@ class NeverEndingFragment : BaseFragment(), NeverEndingView {
         jokesList.adapter = neverEndingAdapter
         neverEndingPresenter.neverEndingView = this
 
-        jokesList.addOnScrollListener(InfiniteScrollListener({ loadJokes() }, linearLayoutManager))
+        jokesList.addOnScrollListener(InfiniteScrollListener({ loadJokes() }, linearLayoutManager, neverEndingAdapter))
     }
 
     private fun loadJokes() = neverEndingPresenter.loadJokes()
