@@ -6,9 +6,9 @@ data class JokeResponse(private val type: String, private val value: JokeEntity)
     fun toJoke(): Joke {
         return Joke.create {
             this@JokeResponse.let {
-                id = it.value!!.id
-                joke = it.value!!.joke
-                categories = it.value!!.categories
+                id = it.value.id
+                joke = android.text.Html.fromHtml(it.value.joke).toString()
+                categories = it.value.categories
             }
         }
     }

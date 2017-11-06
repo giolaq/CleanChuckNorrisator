@@ -12,7 +12,7 @@ data class JokesResponse(private val type: String, private val value: List<JokeE
             return it.value.map {
                 Joke.create {
                     id = it.id
-                    joke = it.joke
+                    joke = android.text.Html.fromHtml(it.joke).toString()
                     categories = it.categories
                 }
             }
