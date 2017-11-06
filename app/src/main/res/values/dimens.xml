@@ -9,4 +9,7 @@
 
     <dimen name="movie_details_title">20dp</dimen>
     <dimen name="movie_details_text">15dp</dimen>
+    <dimen name="button_width">200dp</dimen>
+    <dimen name="margin_top_first_button">148dp</dimen>
+    <dimen name="margin_elements">40dp</dimen>
 </resources>

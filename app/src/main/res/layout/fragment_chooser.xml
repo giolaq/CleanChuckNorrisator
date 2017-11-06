@@ -4,28 +4,28 @@
 
     <Button
         android:id="@+id/button_random"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="141dp"
+        android:layout_marginTop="@dimen/margin_top_first_button"
         android:text="@string/random" />
 
     <Button
         android:id="@+id/button_change_name"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button_random"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="@dimen/margin_elements"
         android:text="@string/change_name" />
 
     <Button
         android:id="@+id/button_ne_list"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/button_width"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button_change_name"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="@dimen/margin_elements"
         android:text="@string/ne_list" />
 </RelativeLayout>

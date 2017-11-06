@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--Base colors-->
-    <color name="colorPrimary">#000000</color>
-    <color name="colorAccent">#000000</color>
-    <color name="colorSecondary">#7f1a18</color>
+    <!--From color tools-->
+    <color name="colorPrimary">#1976d2</color>
+    <color name="colorAccent">#ae52d4</color>
+    <color name="colorSecondary">#004ba0</color>
     <color name="colorTextPrimary">#FFFFFF</color>
-    <color name="colorTextSecondary">#7f1a18</color>
+    <color name="colorTextSecondary">#FFFF88</color>
 
     <color name="translucentBackground">#ED000000</color>
 </resources>
