@@ -54,6 +54,8 @@ class ChooserFragment : BaseFragment(), RandomJokeView {
 
         button_change_name.setOnClickListener { navigator.showChangeName(activity) }
 
+        button_ne_list.setOnClickListener { navigator.showNEList(activity) }
+
     }
 
     override fun renderJoke(joke: Joke) {

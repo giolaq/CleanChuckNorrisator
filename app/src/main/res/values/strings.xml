@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Movies Kotlin</string>
+    <string name="app_name">Clean Chuck Norrisator Kotlin</string>
     <string name="random">Random</string>
     <string name="change_name">Change Name</string>
     <string name="ne_list">NE list</string>
@@ -8,4 +8,7 @@
     <string name="joke_text">Joke Text</string>
     <string name="dismiss">Dismiss</string>
     <string name="submit">Submit</string>
+    <string name="never_ending_screen_title">Never Ending Jokes</string>
+    <string name="joke">Joke!</string>
+    <string name="loading">Loading...</string>
 </resources>

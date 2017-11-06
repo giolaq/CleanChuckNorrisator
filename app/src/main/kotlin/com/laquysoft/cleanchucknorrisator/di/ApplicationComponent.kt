@@ -5,6 +5,7 @@ import com.laquysoft.cleanchucknorrisator.di.ApplicationModule
 import com.laquysoft.cleanchucknorrisator.features.changename.ChangedNameFragment
 import com.laquysoft.cleanchucknorrisator.features.chooser.ChooserFragment
 import com.laquysoft.cleanchucknorrisator.features.chooser.JokeModule
+import com.laquysoft.cleanchucknorrisator.features.neverendingjokes.NeverEndingFragment
 import com.laquysoft.cleanchucknorrisator.navigation.RouteActivity
 import dagger.Component
 import javax.inject.Provider
@@ -19,7 +20,8 @@ interface ApplicationComponent {
 
     //TODO: do scoping here
     fun inject(chooserFragment: ChooserFragment)
-    fun inject(chooserFragment: ChangedNameFragment)
+    fun inject(changedNameFragment: ChangedNameFragment)
+    fun inject(neverEndingFragment: NeverEndingFragment)
 
     fun subComponentBuilders(): Map<Class<*>, Provider<SubcomponentBuilder<*>>>
 }
