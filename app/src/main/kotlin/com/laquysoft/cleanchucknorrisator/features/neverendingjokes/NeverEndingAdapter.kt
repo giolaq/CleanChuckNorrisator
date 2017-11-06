@@ -16,7 +16,7 @@ import kotlin.properties.Delegates
 class NeverEndingAdapter
 @Inject constructor() : RecyclerView.Adapter<NeverEndingAdapter.ViewHolder>() {
 
-    internal var collection: List<Joke> by Delegates.observable(emptyList()) {
+    internal var collection: MutableList<Joke> by Delegates.observable(mutableListOf<Joke>()) {
         _, _, _ -> notifyDataSetChanged()
     }
 
@@ -30,5 +30,10 @@ class NeverEndingAdapter
         fun bind(joke: Joke) {
             itemView.jokeText.text = joke.joke
         }
+    }
+
+    fun addAll(moreItems: List<Joke>) {
+        collection.addAll(moreItems)
+        notifyDataSetChanged()
     }
 }

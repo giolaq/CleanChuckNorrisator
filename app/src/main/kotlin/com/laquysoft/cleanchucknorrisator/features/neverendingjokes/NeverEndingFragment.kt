@@ -1,15 +1,21 @@
 package com.laquysoft.cleanchucknorrisator.features.neverendingjokes
 
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
 import android.view.View
 import com.laquysoft.cleanchucknorrisator.BaseFragment
+import com.laquysoft.cleanchucknorrisator.InfiniteScrollListener
 import com.laquysoft.cleanchucknorrisator.R
 import com.laquysoft.cleanchucknorrisator.features.chooser.Joke
 import com.laquysoft.cleanchucknorrisator.navigation.Navigator
+import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_jokes.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+
 
 /**
  * Created by joaobiriba on 06/11/2017.
@@ -31,7 +37,9 @@ class NeverEndingFragment : BaseFragment(), NeverEndingView {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeView()
-        if (firstTimeCreated(savedInstanceState)) { initializeView(); loadMovies() }
+        if (firstTimeCreated(savedInstanceState)) {
+            initializeView(); loadJokes()
+        }
     }
 
     override fun onDestroy() {
@@ -41,9 +49,9 @@ class NeverEndingFragment : BaseFragment(), NeverEndingView {
 
     override fun renderList(jokes: List<Joke>) {
         for (joke in jokes) {
-            Log.d( "NeverEndingFragment", "Joke " + joke.joke)
+            Log.d("NeverEndingFragment", "Joke " + joke.joke)
         }
-        neverEndingAdapter.collection = jokes
+        neverEndingAdapter.addAll(jokes)
     }
 
 
@@ -60,10 +68,13 @@ class NeverEndingFragment : BaseFragment(), NeverEndingView {
     }
 
     private fun initializeView() {
-        jokesList.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+        val linearLayoutManager = LinearLayoutManager(activity, StaggeredGridLayoutManager.VERTICAL, false)
+        jokesList.layoutManager = linearLayoutManager
         jokesList.adapter = neverEndingAdapter
         neverEndingPresenter.neverEndingView = this
+
+        jokesList.addOnScrollListener(InfiniteScrollListener({ loadJokes() }, linearLayoutManager))
     }
 
-    private fun loadMovies() = neverEndingPresenter.loadJokes()
+    private fun loadJokes() = neverEndingPresenter.loadJokes()
 }
