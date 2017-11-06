@@ -30,9 +30,14 @@
         <activity
             android:name=".features.chooser.ChooserActivity"
             android:label="@string/chooser_screen_title">
-        </activity>    <activity
+        </activity>
+        <activity
             android:name=".features.changename.ChangedNameActivity"
             android:label="@string/change_name_screen_title">
+        </activity>
+        <activity
+            android:name=".features.neverendingjokes.NeverEndingActivity"
+            android:label="@string/never_ending_screen_title">
         </activity>
 
     </application>
