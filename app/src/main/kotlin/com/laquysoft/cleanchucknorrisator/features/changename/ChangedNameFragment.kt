@@ -40,16 +40,13 @@ class ChangedNameFragment : BaseFragment(), RandomJokeView {
 
 
     override fun showLoading() {
-        //TODO: implement method
+        network_cn_progressBar.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
-        //TODO: implement method
+        network_cn_progressBar.visibility = View.GONE
     }
 
-    override fun dispose() {
-        //TODO: dispose view resources
-    }
 
     private fun initializeView() {
         changedNamePresenter.randomJokeView = this

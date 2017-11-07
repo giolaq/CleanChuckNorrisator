@@ -36,15 +36,11 @@ class ChooserFragment : BaseFragment(), RandomJokeView {
 
 
     override fun showLoading() {
-        //TODO: implement method
+        network_progressBar.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
-        //TODO: implement method
-    }
-
-    override fun dispose() {
-        //TODO: dispose view resources
+        network_progressBar.visibility = View.GONE
     }
 
     private fun initializeView() {

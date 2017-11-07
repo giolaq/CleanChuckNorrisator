@@ -63,10 +63,6 @@ class NeverEndingFragment : BaseFragment(), NeverEndingView {
         //TODO: implement method
     }
 
-    override fun dispose() {
-        //TODO: dispose view resources
-    }
-
     private fun initializeView() {
         val linearLayoutManager = LinearLayoutManager(activity, StaggeredGridLayoutManager.VERTICAL, false)
         jokesList.layoutManager = linearLayoutManager

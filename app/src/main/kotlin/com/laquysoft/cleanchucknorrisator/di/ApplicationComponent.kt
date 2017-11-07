@@ -17,8 +17,6 @@ import javax.inject.Singleton
 interface ApplicationComponent {
     fun inject(application: AndroidApplication)
     fun inject(routeActivity: RouteActivity)
-
-    //TODO: do scoping here
     fun inject(chooserFragment: ChooserFragment)
     fun inject(changedNameFragment: ChangedNameFragment)
     fun inject(neverEndingFragment: NeverEndingFragment)

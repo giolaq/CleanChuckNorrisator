@@ -13,7 +13,6 @@ class NeverEndingPresenter
 
     fun destroy() {
         getRandomJokes.dispose()
-        neverEndingView.dispose()
     }
 
     fun loadJokes() {

@@ -14,12 +14,13 @@ interface JokeDataSource : JokeRepository {
 
     class Network
     @Inject constructor(private val restApi: RestApi) : JokeDataSource {
+        val EXPLICIT = "explicit"
         override fun joke(noExplicit: Boolean?): Single<Joke> {
             if (noExplicit == false) {
                 return restApi.randomJoke(null).map { jokeEntity -> jokeEntity.toJoke() }
 
             } else {
-                return restApi.randomJoke("explicit").map { jokeEntity -> jokeEntity.toJoke() }
+                return restApi.randomJoke(EXPLICIT).map { jokeEntity -> jokeEntity.toJoke() }
             }
         }
 
@@ -28,7 +29,7 @@ interface JokeDataSource : JokeRepository {
                 return restApi.randomJokeChangedName(name, surname, null).map { jokeEntity -> jokeEntity.toJoke() }
 
             } else {
-                return restApi.randomJokeChangedName(name, surname, "explicit").map { jokeEntity -> jokeEntity.toJoke() }
+                return restApi.randomJokeChangedName(name, surname, EXPLICIT).map { jokeEntity -> jokeEntity.toJoke() }
             }
         }
 
@@ -37,7 +38,7 @@ interface JokeDataSource : JokeRepository {
                 return restApi.randomJokes(number, null).map { jokeEntity -> jokeEntity.toJokeList() }
 
             } else {
-                return restApi.randomJokes(number, "explicit").map { jokeEntity -> jokeEntity.toJokeList() }
+                return restApi.randomJokes(number, EXPLICIT).map { jokeEntity -> jokeEntity.toJokeList() }
             }
         }
 

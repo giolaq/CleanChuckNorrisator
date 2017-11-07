@@ -1,8 +1,7 @@
 package com.laquysoft.cleanchucknorrisator.features.chooser
 
 
-import com.laquysoft.cleanchucknorrisator.AndroidApplication
-import com.laquysoft.cleanchucknorrisator.Prefs
+
 import com.laquysoft.cleanchucknorrisator.prefs
 import javax.inject.Inject
 
@@ -17,7 +16,6 @@ class RandomJokePresenter
 
     fun destroy() {
         getRadomJoke.dispose()
-        randomJokeView.dispose()
     }
 
     fun loadRandomJoke() {
@@ -27,7 +25,7 @@ class RandomJokePresenter
                     randomJokeView.renderJoke(joke)
                     randomJokeView.hideLoading()
                 },
-                { TODO() })
+                { randomJokeView.hideLoading()})
     }
 
     fun setNoExplicitFilter(check: Boolean) {

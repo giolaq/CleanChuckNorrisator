@@ -8,5 +8,4 @@ import com.laquysoft.cleanchucknorrisator.framework.view.LoadingView
  */
 interface NeverEndingView : LoadingView {
     fun renderList(jokes: List<Joke>)
-    fun dispose()
 }
