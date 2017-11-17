@@ -17,6 +17,10 @@ class ChooserFragment : BaseFragment(), RandomJokeView {
     @Inject lateinit var navigator: Navigator
     @Inject lateinit var randomJokePresenter: RandomJokePresenter
 
+    private lateinit var dialog: Dialog
+    private var isShowingDialog = false
+    private var jokeToShow: String = ""
+
     override fun layoutId() = R.layout.fragment_chooser
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,6 +61,10 @@ class ChooserFragment : BaseFragment(), RandomJokeView {
             val check = checkBox.isChecked
             randomJokePresenter.setNoExplicitFilter(check)
         }
+
+        if (isShowingDialog) {
+            showJokeDialog(jokeToShow);
+        }
     }
 
     override fun renderJoke(joke: Joke) {
@@ -64,15 +72,45 @@ class ChooserFragment : BaseFragment(), RandomJokeView {
         showJokeDialog(joke.joke)
     }
 
+
     private fun showJokeDialog(joke: String) {
-        val dialog = Dialog(activity)
+        dialog = Dialog(activity)
         dialog.setContentView(R.layout.random_joke_dialog)
         dialog.setTitle("Random joke")
-        dialog.dismiss_button.setOnClickListener { dialog.dismiss() }
+        dialog.dismiss_button.setOnClickListener {
+            dialog.dismiss()
+            isShowingDialog = false
+        }
         dialog.joke.setText(joke)
         dialog.show()
+        isShowingDialog = true
+        jokeToShow = joke
     }
 
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        dialog = Dialog(activity)
+
+        if (savedInstanceState != null) {
+            isShowingDialog = savedInstanceState.getBoolean("IS_SHOWING_DIALOG", false);
+            jokeToShow = savedInstanceState.getString("JOKE", "No Joke");
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.putBoolean("IS_SHOWING_DIALOG", isShowingDialog);
+        outState?.putString("JOKE", jokeToShow);
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (dialog.isShowing) {
+            dialog.dismiss()
+        }
+    }
 
     private fun loadRandomJoke() = randomJokePresenter.loadRandomJoke()
 }
