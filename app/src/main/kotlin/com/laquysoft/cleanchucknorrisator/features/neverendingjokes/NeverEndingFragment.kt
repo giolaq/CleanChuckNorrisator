@@ -1,5 +1,6 @@
 package com.laquysoft.cleanchucknorrisator.features.neverendingjokes
 
+import android.app.Dialog
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -13,6 +14,7 @@ import com.laquysoft.cleanchucknorrisator.features.chooser.Joke
 import com.laquysoft.cleanchucknorrisator.navigation.Navigator
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.fragment_jokes.*
+import kotlinx.android.synthetic.main.random_joke_dialog.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -68,9 +70,20 @@ class NeverEndingFragment : BaseFragment(), NeverEndingView {
         jokesList.layoutManager = linearLayoutManager
         jokesList.adapter = neverEndingAdapter
         neverEndingPresenter.neverEndingView = this
+        neverEndingAdapter.clickListener = { joke -> neverEndingPresenter.onJokeClick(joke)}
 
         jokesList.addOnScrollListener(InfiniteScrollListener({ loadJokes() }, linearLayoutManager, neverEndingAdapter))
     }
 
     private fun loadJokes() = neverEndingPresenter.loadJokes()
+
+    override fun displayDetails(joke: Joke) {
+        val dialog = Dialog(activity)
+        dialog.setContentView(R.layout.random_joke_dialog)
+        dialog.setTitle("Clicked Joke")
+        dialog.dismiss_button.setOnClickListener { dialog.dismiss() }
+        dialog.joke.setText(joke.joke)
+        dialog.show()
+    }
+
 }

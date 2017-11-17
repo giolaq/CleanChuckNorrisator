@@ -1,6 +1,7 @@
 package com.laquysoft.cleanchucknorrisator.features.neverendingjokes
 
 import android.util.Log
+import com.laquysoft.cleanchucknorrisator.features.chooser.Joke
 import javax.inject.Inject
 
 /**
@@ -21,6 +22,10 @@ class NeverEndingPresenter
                 { jokes -> neverEndingView.renderList(jokes)
                     neverEndingView.hideLoading() },
                 { Log.d("NeverEndingPresenter", "error getting Random Jokes")})
+    }
+
+    fun onJokeClick(joke: Joke) {
+        neverEndingView.displayDetails(joke)
     }
 
 }

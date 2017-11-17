@@ -1,5 +1,6 @@
 package com.laquysoft.cleanchucknorrisator.features.neverendingjokes
 
+import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import com.laquysoft.cleanchucknorrisator.R
 import com.laquysoft.cleanchucknorrisator.features.chooser.Joke
+import com.laquysoft.cleanchucknorrisator.navigation.Navigator
 import kotlinx.android.synthetic.main.item_joke.view.*
 import javax.inject.Inject
 import kotlin.properties.Delegates
@@ -28,6 +30,8 @@ class NeverEndingAdapter
     internal var collection: MutableList<Joke> by Delegates.observable(mutableListOf<Joke>()) { _, _, _ ->
         notifyDataSetChanged()
     }
+
+    internal var clickListener: (Joke) -> Unit = { _ ->  }
 
     override fun getItemCount(): Int {
 
@@ -73,7 +77,7 @@ class NeverEndingAdapter
             return
         }
 
-        (vh as ViewHolder).bind(collection[position])
+        (vh as ViewHolder).bind(collection[position], clickListener)
 
 
     }
@@ -89,9 +93,11 @@ class NeverEndingAdapter
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(joke: Joke) {
+        fun bind(joke: Joke, clickListener: (Joke) -> Unit) {
             itemView.jokeText.text = joke.joke
+            itemView.setOnClickListener { clickListener(joke)}
         }
+
     }
 
     fun addAll(moreItems: List<Joke>) {
@@ -102,11 +108,11 @@ class NeverEndingAdapter
 
     class ProgressViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         var progressBar: ProgressBar
-
         init {
             progressBar = v.findViewById<ProgressBar>(R.id.progressBar) as ProgressBar
         }
     }
+
 
 
 }
